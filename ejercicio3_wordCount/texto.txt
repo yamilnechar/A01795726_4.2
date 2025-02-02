@@ -1,0 +1,4 @@
+Este es un ejemplo de archivo de texto.
+Este archivo contiene palabras repetidass.
+Las palabras repetidas aparecen varias veces en este texto.
+Este texto es solo un ejemplo.
