@@ -1,0 +1,9 @@
+************* Module compute_statistics
+compute_statistics.py:10:17: W0621: Redefining name 'file_name' from outer scope (line 59) (redefined-outer-name)
+compute_statistics.py:12:4: W0621: Redefining name 'numbers' from outer scope (line 62) (redefined-outer-name)
+compute_statistics.py:46:19: W0621: Redefining name 'avg' from outer scope (line 68) (redefined-outer-name)
+compute_statistics.py:50:11: W0621: Redefining name 'var' from outer scope (line 71) (redefined-outer-name)
+
+------------------------------------------------------------------
+Your code has been rated at 9.26/10 (previous run: 9.26/10, +0.00)
+
