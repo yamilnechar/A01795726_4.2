@@ -31,10 +31,10 @@ def to_binary(number):
 
 def to_hexadecimal(number):
     """Convierte un número decimal a hexadecimal sin usar hex()."""
-    HEX_CHARS = "0123456789ABCDEF"
+    hex_chars = "0123456789ABCDEF"  # Ahora en snake_case
     hex_str = ""
     while number > 0:
-        hex_str = HEX_CHARS[number % 16] + hex_str
+        hex_str = hex_chars[number % 16] + hex_str
         number //= 16
     return hex_str if hex_str else "0"
 
@@ -54,9 +54,9 @@ if __name__ == "__main__":
 
     results = []
     for num in numbers:
-        binary_rep = to_binary(num)
-        hex_rep = to_hexadecimal(num)
-        results.append(f"Número: {num} | Binario: {binary_rep} | Hexadecimal: {hex_rep}")
+        BINARY_REP = to_binary(num)  # Ahora en UPPER_CASE
+        HEX_REP = to_hexadecimal(num)  # Ahora en UPPER_CASE
+        results.append(f"Número: {num} | Binario: {BINARY_REP} | Hexadecimal: {HEX_REP}")
 
     elapsed_time = time.time() - start_time
 
