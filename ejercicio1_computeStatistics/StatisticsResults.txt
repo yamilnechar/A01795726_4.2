@@ -1,0 +1,9 @@
+
+  Statistics:
+  Mean: 51.81818181818182
+  Median: 50.0
+  Mode: [20.0]
+  Variance: 851.2396694214876
+  Std Dev: 29.176011883420387
+  Execution Time: 0.00010 sec
+  
