@@ -7,79 +7,79 @@ a partir de un archivo de texto con números.
 import sys
 import time
 
-def read_numbers(file_name):
+def read_numbers(file_path):
     """Lee un archivo y devuelve una lista de números válidos."""
-    numbers = []
+    values = []
     try:
-        with open(file_name, 'r', encoding="utf-8") as file:
+        with open(file_path, 'r', encoding="utf-8") as file:
             for line in file:
                 try:
-                    numbers.append(float(line.strip()))
+                    values.append(float(line.strip()))
                 except ValueError:
                     print(f"Ignorando valor no numérico: {line.strip()}")
     except FileNotFoundError:
-        print(f"Error: El archivo '{file_name}' no existe.")
+        print(f"Error: El archivo '{file_path}' no existe.")
         sys.exit(1)
-    return numbers
+    return values
 
-def mean(nums):
+def mean(numbers):
     """Calcula la media de una lista de números."""
-    return sum(nums) / len(nums)
+    return sum(numbers) / len(numbers)
 
-def median(nums):
+def median(numbers):
     """Calcula la mediana de una lista de números."""
-    nums.sort()
-    n = len(nums)
+    numbers.sort()
+    n = len(numbers)
     if n % 2 == 0:
-        return (nums[n//2 - 1] + nums[n//2]) / 2
-    return nums[n//2]
+        return (numbers[n//2 - 1] + numbers[n//2]) / 2
+    return numbers[n//2]
 
-def mode(nums):
+def mode(numbers):
     """Calcula la moda de una lista de números."""
-    freq = {}
-    for num in nums:
-        freq[num] = freq.get(num, 0) + 1
-    highest_freq = max(freq.values())
-    modes = [k for k, v in freq.items() if v == highest_freq]
-    return modes if len(modes) < len(nums) else None
+    frequency = {}
+    for num in numbers:
+        frequency[num] = frequency.get(num, 0) + 1
+    highest_freq = max(frequency.values())
+    modes = [k for k, v in frequency.items() if v == highest_freq]
+    return modes if len(modes) < len(numbers) else None
 
-def variance(nums, avg):
+def variance(numbers, mean_value):
     """Calcula la varianza de una lista de números."""
-    return sum((x - avg) ** 2 for x in nums) / len(nums)
+    return sum((x - mean_value) ** 2 for x in numbers) / len(numbers)
 
-def stddev(var):
+def stddev(variance_value):
     """Calcula la desviación estándar a partir de la varianza."""
-    return var ** 0.5
+    return variance_value ** 0.5
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Uso: python compute_statistics.py archivo_datos.txt")
         sys.exit(1)
 
-    file_name = sys.argv[1]
+    input_file = sys.argv[1]
     start_time = time.time()
 
-    numbers = read_numbers(file_name)
+    data_values = read_numbers(input_file)
 
-    if not numbers:
+    if not data_values:
         print("Error: No hay números válidos en el archivo.")
         sys.exit(1)
 
-    avg = mean(numbers)
-    med = median(numbers)
-    mod = mode(numbers)
-    var = variance(numbers, avg)
-    std = stddev(var)
+    avg_value = mean(data_values)
+    med_value = median(data_values)
+    mod_value = mode(data_values)
+    var_value = variance(data_values, avg_value)
+    std_value = stddev(var_value)
 
     elapsed_time = time.time() - start_time
 
     results = f"""
     Estadísticas calculadas:
-    - Media: {avg}
-    - Mediana: {med}
-    - Moda: {mod}
-    - Varianza: {var}
-    - Desviación estándar: {std}
+    - Media: {avg_value}
+    - Mediana: {med_value}
+    - Moda: {mod_value}
+    - Varianza: {var_value}
+    - Desviación estándar: {std_value}
     - Tiempo de ejecución: {elapsed_time:.5f} segundos
     """
 
