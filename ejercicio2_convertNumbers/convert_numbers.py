@@ -6,60 +6,63 @@ sin usar las funciones predefinidas bin() y hex().
 import sys
 import time
 
-def leer_numeros(archivo):
-  numeros = []
-  try:
-    with open(archivo, 'r') as f:
-      for linea in f:
-        try:
-          numeros.append(int(linea.strip()))
-        except:
-          print("Valor no numérico ignorado:", linea.strip())
-  except:
-    print("Error al abrir el archivo:", archivo)
-    sys.exit(1)
-  return numeros
+def read_numbers(file_path):
+    """Lee un archivo y devuelve una lista de números enteros válidos."""
+    values = []
+    try:
+        with open(file_path, 'r', encoding="utf-8") as file:
+            for line in file:
+                try:
+                    values.append(int(line.strip()))
+                except ValueError:
+                    print(f"Ignorando valor no numérico: {line.strip()}")
+    except FileNotFoundError:
+        print(f"Error: El archivo '{file_path}' no existe.")
+        sys.exit(1)
+    return values
 
-def convertir_a_binario(num):
-  binario = ""
-  while num > 0:
-    binario = str(num % 2) + binario
-    num //= 2
-  return binario if binario else "0"
+def to_binary(number):
+    """Convierte un número decimal a binario sin usar bin()."""
+    binary_str = ""
+    while number > 0:
+        binary_str = str(number % 2) + binary_str
+        number //= 2
+    return binary_str if binary_str else "0"
 
-def convertir_a_hexadecimal(num):
-  hex_chars = "0123456789ABCDEF"
-  hexadecimal = ""
-  while num > 0:
-    hexadecimal = hex_chars[num % 16] + hexadecimal
-    num //= 16
-  return hexadecimal if hexadecimal else "0"
+def to_hexadecimal(number):
+    """Convierte un número decimal a hexadecimal sin usar hex()."""
+    HEX_CHARS = "0123456789ABCDEF"
+    hex_str = ""
+    while number > 0:
+        hex_str = HEX_CHARS[number % 16] + hex_str
+        number //= 16
+    return hex_str if hex_str else "0"
 
-if __name__=="__main__":
-  if len(sys.argv)!=2:
-    print("Uso: python convert_numbers.py archivo_numeros.txt")
-    sys.exit(1)
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Uso: python convert_numbers.py archivo_numeros.txt")
+        sys.exit(1)
 
-  archivo = sys.argv[1]
-  inicio = time.time()
+    input_file = sys.argv[1]
+    start_time = time.time()
 
-  numeros = leer_numeros(archivo)
-  
-  if len(numeros)==0:
-    print("Error: No hay números válidos en el archivo")
-    sys.exit(1)
+    numbers = read_numbers(input_file)
 
-  resultados = []
-  for num in numeros:
-    binario = convertir_a_binario(num)
-    hexadecimal = convertir_a_hexadecimal(num)
-    resultados.append(f"Número: {num} | Binario: {binario} | Hexadecimal: {hexadecimal}")
+    if not numbers:
+        print("Error: No hay números válidos en el archivo.")
+        sys.exit(1)
 
-  tiempo_total = time.time() - inicio
+    results = []
+    for num in numbers:
+        binary_rep = to_binary(num)
+        hex_rep = to_hexadecimal(num)
+        results.append(f"Número: {num} | Binario: {binary_rep} | Hexadecimal: {hex_rep}")
 
-  print("\n".join(resultados))
-  print(f"\nTiempo de ejecución: {tiempo_total:.5f} segundos")
+    elapsed_time = time.time() - start_time
 
-  with open("ConversionResults.txt", "w") as f:
-    f.write("\n".join(resultados))
-    f.write(f"\nTiempo de ejecución: {tiempo_total:.5f} segundos")
+    print("\n".join(results))
+    print(f"\nTiempo de ejecución: {elapsed_time:.5f} segundos")
+
+    with open("ConversionResults.txt", "w", encoding="utf-8") as result_file:
+        result_file.write("\n".join(results))
+        result_file.write(f"\nTiempo de ejecución: {elapsed_time:.5f} segundos")

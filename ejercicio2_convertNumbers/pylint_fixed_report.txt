@@ -1,0 +1,8 @@
+************* Module convert_numbers
+convert_numbers.py:34:4: C0103: Variable name "HEX_CHARS" doesn't conform to snake_case naming style (invalid-name)
+convert_numbers.py:57:8: C0103: Constant name "binary_rep" doesn't conform to UPPER_CASE naming style (invalid-name)
+convert_numbers.py:58:8: C0103: Constant name "hex_rep" doesn't conform to UPPER_CASE naming style (invalid-name)
+
+------------------------------------------------------------------
+Your code has been rated at 9.39/10 (previous run: 0.00/10, +9.39)
+
