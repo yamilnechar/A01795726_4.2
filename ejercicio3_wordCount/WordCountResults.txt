@@ -1,0 +1,19 @@
+este: 4
+texto: 3
+es: 2
+un: 2
+ejemplo: 2
+de: 2
+archivo: 2
+palabras: 2
+contiene: 1
+repetidass: 1
+las: 1
+repetidas: 1
+aparecen: 1
+varias: 1
+veces: 1
+en: 1
+solo: 1
+
+Tiempo de ejecución: 0.00024 segundos

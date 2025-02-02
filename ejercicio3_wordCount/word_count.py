@@ -9,24 +9,24 @@ import re
 
 def leer_texto(file_path):
     """Lee un archivo de texto y devuelve una lista de palabras limpias."""
-    words = []
+    word_list = []
     try:
         with open(file_path, 'r', encoding="utf-8") as file:
             for line in file:
                 # Eliminar signos de puntuación usando regex
                 clean_line = re.sub(r'[^\w\s]', '', line.lower())
-                words.extend(clean_line.split())
+                word_list.extend(clean_line.split())
     except FileNotFoundError:
         print(f"Error: El archivo '{file_path}' no existe.")
         sys.exit(1)
-    return words
+    return word_list
 
 def contar_palabras(word_list):
     """Cuenta la frecuencia de cada palabra en la lista."""
-    word_count = {}
-    for word in word_list:
-        word_count[word] = word_count.get(word, 0) + 1
-    return word_count
+    count_dict = {}
+    for current_word in word_list:
+        count_dict[current_word] = count_dict.get(current_word, 0) + 1
+    return count_dict
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -36,14 +36,14 @@ if __name__ == "__main__":
     input_file = sys.argv[1]
     start_time = time.time()
 
-    words = leer_texto(input_file)
+    cleaned_words = leer_texto(input_file)
 
-    if not words:
+    if not cleaned_words:
         print("Error: No hay palabras en el archivo.")
         sys.exit(1)
 
-    word_count = contar_palabras(words)
-    sorted_results = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
+    word_frequencies = contar_palabras(cleaned_words)
+    sorted_results = sorted(word_frequencies.items(), key=lambda x: x[1], reverse=True)
 
     elapsed_time = time.time() - start_time
 
